@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class worksheets extends Model
 {
     use HasFactory;
+    /**
+     * The primary key associated with the table.
+     *
+     * @var string
+     */
+    protected $primaryKey = 'worksheet_id';
 }

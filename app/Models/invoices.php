@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class invoices extends Model
 {
     use HasFactory;
+    /**
+     * The primary key associated with the table.
+     *
+     * @var string
+     */
+    protected $primaryKey = 'invoices_id';
 }
