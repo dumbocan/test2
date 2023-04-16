@@ -35,6 +35,8 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/boats',[BoatsController::class,'show'])->name('boats');
 Route::get('/clients',[clientsController::class,'show'])->name('clients');
+Route::get('/clients/newclient',[clientsController::class,'newclient'])->name('clients.newclient');
+
 Route::get('/projects',[projectsController::class,'show'])->name('projects');
 Route::get('/management',[managementController::class,'show'])->name('management');
 });
