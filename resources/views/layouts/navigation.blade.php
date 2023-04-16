@@ -1,7 +1,7 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-22">
+        <div class="flex justify-between h-21">
             <div class="flex">
                 <!-- Logo -->
                 <div class="w-20 h-20 mt-2">
@@ -41,6 +41,22 @@
                     </x-nav-link>
                 </div>
             </div>
+
+            <!-- search box -->
+
+
+
+            <div class="flex">
+                {{ Form::open(array('route' => 'search', 'method' => 'POST')) }}
+                    @csrf
+                    <x-text-input id="search" name="search" type="text" class=" mt-2 border border-gray-700 w-64" />
+                        <button type="submit" >
+                            <img src="{{ asset('images/icons/search.svg') }}" class="pt-3  ml-4 w-10">
+                        </button>
+
+                {{ Form::close() }}
+            </div>
+
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
@@ -88,6 +104,8 @@
             </div>
         </div>
     </div>
+
+
 
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
