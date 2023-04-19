@@ -185,7 +185,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+        Collective\Html\HtmlServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -211,5 +211,6 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
-
+    "Form" => Collective\Html\FormFacde::class,
+    "Html" => \Collective\Html\FormFacde::class,
 ];

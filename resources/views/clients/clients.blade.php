@@ -16,14 +16,14 @@
 
                 </x-nav-link>
             </h2>
-        </div>
+        </div>   {{ $clients->links() }}
     </x-slot>
 
 <!-- list of clients -->
     @foreach ($clients as $client)
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+        <div class="pt-5">
+            <div class="max-w-6xl mx-auto sm:px-2 lg:px-4 ">
+                <div class="h-40 bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900">
 
 
@@ -31,11 +31,11 @@
                             {{$client->client_name}}
                             <br>
                             {{$client->client_street}}
-                            <br>
+                            {{' - '}}
                             {{$client->client_pc}}
-                            <br>
+                            {{' - '}}
                             {{$client->client_city}}
-                            <br>
+                            {{' - '}}
                             {{$client->client_country}}
                             <br>
                             {{$client->client_telephone}}
@@ -43,6 +43,9 @@
                             {{$client->client_email}}
                             <br>
                             {{$client->client_ident}}
+                            <br>
+                            <br>
+                            {{$client->client_comments}}
                             <br>
                         </div>
 
