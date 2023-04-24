@@ -6,7 +6,7 @@
     <x-slot name="header">
         <div class="flex">
             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                <x-nav-link :href="route('clients.newclient')" :active="request()->routeIs('clients.newclient')">
+                <x-nav-link :href="route('clients.create')" :active="request()->routeIs('clients.create')">
                     {{ __('Nuevo') }}
                 </x-nav-link>
             </div>
@@ -16,13 +16,13 @@
 
  <!-- Responsive menu -->
     <div class="sm:hidden space-x-8 sm:-my-px sm:ml-10  pt-2 pb-3 space-y-1">
-        <x-responsive-nav-link :href="route('clients.newclient')" :active="request()->routeIs('clients.newclient')">
+        <x-responsive-nav-link :href="route('clients.create')" :active="request()->routeIs('clients.create')">
             {{ __('Nuevo') }}
         </x-responsive-nav-link>
     </div>
 
 
-{!! Form::open(['route' => 'clients.addclient', 'class' => 'mt-7 mx-10 flex flex-col justify-center ']) !!}
+{!! Form::open(['route' => 'clients.store', 'class' => 'mt-7 mx-10 flex flex-col justify-center ']) !!}
     {!! csrf_field() !!}
 
     <div class="grid sm:grid-cols-2 gap-4 ">

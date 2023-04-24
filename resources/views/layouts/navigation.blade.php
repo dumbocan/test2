@@ -26,7 +26,7 @@
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('clients')" :active="request()->routeIs('clients')">
+                    <x-nav-link :href="route('clients.index')" :active="request()->routeIs('clients.index')">
                         {{ __('Clientes') }}
                     </x-nav-link>
                 </div>
@@ -60,19 +60,7 @@
             </div>
 
 
-        <!--    <div class="flex">
-                {{ Form::open(array('route' => 'search', 'method' => 'POST')) }}
-                    @csrf
-                    <x-text-input id="search" name="search" type="text" class=" mt-2 border border-gray-700 w-64" />
-                        <button type="submit" >
-                            <img src="{{ asset('images/icons/search.svg') }}" class="pt-3  ml-4 w-10">
-                        </button>
-
-                {{ Form::close() }}
-            </div>
-
-
-             Settings Dropdown -->
+            <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
@@ -142,7 +130,7 @@
         </div>
 
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('clients')" :active="request()->routeIs('clients')">
+            <x-responsive-nav-link :href="route('clients.index')" :active="request()->routeIs('clients.index')">
                 {{ __('Clientes') }}
             </x-responsive-nav-link>
         </div>

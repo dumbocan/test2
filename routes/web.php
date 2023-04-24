@@ -32,15 +32,25 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+//Route::resource('/clients','App\Http\Controllers\ClientsController');
+Route::resource('clients', ClientsController::class)->except(['show']);
+
 Route::post('/search', [SearchController::class,'show'])->name('search');
 
 Route::get('/boats',[BoatsController::class,'show'])->name('boats');
-Route::get('/clients',[clientsController::class,'show'])->name('clients');
-Route::post('/clients/newclient',[clientsController::class,'addclient'])->name('clients.addclient');
-
-Route::get('/clients/newclient',[clientsController::class,'newclient'])->name('clients.newclient');
 Route::get('/projects',[projectsController::class,'show'])->name('projects');
 Route::get('/management',[managementController::class,'show'])->name('management');
 });
 
 require __DIR__.'/auth.php';
+
+
+
+/*
+Route::get('/clients',[clientsController::class,'index'])->name('clients');
+Route::get('/clients/create',[clientsController::class,'create'])->name('clients.create');
+Route::post('/clients/store',[clientsController::class,'store'])->name('clients.store');
+Route::get('/clients/{client_id}/edit' ,[clientsController::class,'edit'])->name('clients.edit');
+Route::put('/clients/{client_id}', [clientsController::class,'update'])->name('clients.update');
+Route::delete('/clients/{client_id}' ,[clientsController::class,'destroy'])->name('clients.destroy');
+*/
