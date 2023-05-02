@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('boats', function (Blueprint $table) {
             $table->id('boat_id');
             $table->string('boat_name');
-            $table->string('boat_marina');
-            $table->string('boat_type');
-            $table->string('boat_picture');
-            $table->string('boat_commets');
+            $table->string('boat_marina')->nullable();
+            $table->string('boat_type')->nullable();
+            $table->string('boat_picture')->nullable();
+            $table->string('boat_comments')->nullable();
             $table->foreignId('client_id')->constrained('clients','client_id');
             $table->timestamps();
         });

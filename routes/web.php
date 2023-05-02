@@ -32,12 +32,11 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-//Route::resource('/clients','App\Http\Controllers\ClientsController');
 Route::resource('clients', ClientsController::class)->except(['show']);
+Route::resource('boats',BoatsController::class)->except(['show']);
 
 Route::post('/search', [SearchController::class,'show'])->name('search');
 
-Route::get('/boats',[BoatsController::class,'show'])->name('boats');
 Route::get('/projects',[projectsController::class,'show'])->name('projects');
 Route::get('/management',[managementController::class,'show'])->name('management');
 });

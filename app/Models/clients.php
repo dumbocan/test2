@@ -14,4 +14,10 @@ class Clients extends Model
      * @var string
      */
     protected $primaryKey = 'client_id';
+
+    public function boats()
+{
+    return $this->hasMany(Boats::class, 'client_id');
+}
+
 }

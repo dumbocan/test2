@@ -8,18 +8,20 @@ use Illuminate\Support\Facades\DB;
 
 
 class ClientsController extends Controller
-{
-    public function show($client)
-        {
-            $client = Clients::find($client);
+{   public $boat;
 
-        }
+    public function show($client)
+    {
+        $client = Clients::find($client);
+
+    }
 
     public function index()
-        {
-            $page = Clients::paginate(10);
-            return view('clients.index', ['clients' => $page]);
-        }
+{
+    $clients = Clients::with('boats')->paginate(10);
+
+    return view('clients.index', compact('clients'));
+}
 
     public function create()
     {

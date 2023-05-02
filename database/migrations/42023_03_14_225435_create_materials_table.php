@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('materials', function (Blueprint $table) {
             $table->id('material_id');
             $table->string('material_name');
-            $table->float('material_stock',8,2);
-            $table->float('material_buy_price', 8, 2);
+            $table->float('material_stock',8,2)->nullable();
+            $table->float('material_buy_price', 8, 2)->nullable();
             $table->float('material_sell_price', 8, 2);
             $table->string('material_sn')->nullable();
             $table->foreignId('supplier_id')->constrained('suppliers','supplier_id');

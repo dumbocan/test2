@@ -17,9 +17,9 @@ return new class extends Migration
             $table->date('project_date');
             $table->string('project_description');
             $table->string('project_state');
-            $table->string('project_comment');
-            $table->string('pictures');
-            $table->string('file');
+            $table->string('project_comments')->nullable();
+            $table->string('pictures')->nullable();
+            $table->string('file')->nullable();
             $table->foreignId('boat_id')->constrained('boats','boat_id');
             $table->timestamps();
         });
