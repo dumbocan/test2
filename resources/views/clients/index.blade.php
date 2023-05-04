@@ -58,14 +58,24 @@
             <!-- client data -->
 
                         <div class="grid md:grid-cols-8 gap 10 ">
-                            <span class="mr-3 p-3 border border-black rounded-lg col-span-4">
+                            <span class="md:mt-5 mr-3 p-3 border border-black rounded-lg col-span-4 ">
 
-                                <!-- butons update and delete -->
-                                @include('components.buttons',
-                                [
-                                'editLink' => 'href="' . route('clients.edit', $client->client_id) . '"',
-                                'deleteLink' => 'onclick="Livewire.emit(\'showDeleteConfirmationModal\', \'' . $client->client_id . '\')"',
-                                ])
+
+
+                            <!-- butons update and delete-->
+                            <div >
+                                <div class="grid grid-cols-2 gap-4  float-right">
+                                    <a href="{{ route('clients.edit', $client->client_id) }}" >
+                                        <button>
+                                            <img class="w-5" src="{{ asset('images/icons/update.svg') }}" alt="Icon">
+                                        </button>
+                                    </a>
+                                    <button onclick ="Livewire.emit('showDeleteConfirmationModal', '{{ $client->client_id }}')">
+                                        <img class="w-5" src="{{ asset('images/icons/delete.svg') }}" alt="Icon">
+                                    </button>
+                                </div>
+                            </div>
+
 
                             <span class="text-2xl underline underline-offset-2">
                                     {{$client->client_name}}
@@ -83,17 +93,30 @@
 
                             <!-- boats  -->
 
-                            <span class=" my-5 mr-3 p-3 border border-black rounded-lg  col-span-4">
+                            <span class="mt-5  mr-3 p-3 border border-black rounded-lg  col-span-4">
 
                                 @if($client->boats->isNotEmpty())
 
 
-                                    <!-- butons update and delete -->
-                                    @include('components.buttons',
-                                    [
-                                    'editLink' => 'href="' . route('clients.edit', $client->client_id) . '"',
-                                    'deleteLink' => 'onclick="Livewire.emit(\'showDeleteConfirmationModal\', \'' . $client->client_id . '\')"',
-                                    ])
+
+
+                                    <!-- butons update and delete-->
+                            <div >
+                                <div class="grid grid-cols-2 gap-4  float-right">
+                                    <a href="{{ route('boats.edit', $client->client_id) }}" >
+                                        <button>
+                                            <img class="w-5" src="{{ asset('images/icons/update.svg') }}" alt="Icon">
+                                        </button>
+                                    </a>
+                                    <button onclick ="Livewire.emit('showDeleteConfirmationModal', '{{ $client->client_id }}')">
+                                        <img class="w-5" src="{{ asset('images/icons/delete.svg') }}" alt="Icon">
+                                    </button>
+                                </div>
+                            </div>
+
+
+
+
 
 
                                     @foreach($client->boats as $boat)
@@ -119,13 +142,20 @@
 
                        <!-- projects of the boat -->
 
-                        <div class=" border border-black rounded-lg mr-3 p-3">
-                             <!-- butons update and delete -->
-                             @include('components.buttons',
-                                    [
-                                    'editLink' => 'href="' . route('clients.edit', $client->client_id) . '"',
-                                    'deleteLink' => 'onclick="Livewire.emit(\'showDeleteConfirmationModal\', \'' . $client->client_id . '\')"',
-                                    ])
+                        <div class="mt-5 border border-black rounded-lg mr-3 p-3">
+                                  <!-- butons update and delete-->
+                                  <div >
+                                <div class="grid grid-cols-2 gap-4  float-right">
+                                    <a href="{{ route('clients.edit', $client->client_id) }}" >
+                                        <button>
+                                            <img class="w-5" src="{{ asset('images/icons/update.svg') }}" alt="Icon">
+                                        </button>
+                                    </a>
+                                    <button onclick ="Livewire.emit('showDeleteConfirmationModal', '{{ $client->client_id }}')">
+                                        <img class="w-5" src="{{ asset('images/icons/delete.svg') }}" alt="Icon">
+                                    </button>
+                                </div>
+                            </div>
                             <span class="text-2xl underline underline-offset-2">
                                 Proyectos
                             </span>

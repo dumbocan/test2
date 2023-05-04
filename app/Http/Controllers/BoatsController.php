@@ -59,12 +59,12 @@ try {
     $boat->boat_type = ucwords($request->input('boat_type'));
     $boat->boat_picture = null;
     $boat->boat_comments = ucwords($request->input('boat_comments'));
-    $boat->client_id = $request->input('client_id');
+    //$boat->client_id = $request->input('client_id');
 
     // Update the client in the database
     $boat->save();
 
-    return redirect()->route('boats.index')->with('success', 'Embarcacion actualizada correctamente.');
+    return redirect()->route('clients.index')->with('success', 'Embarcacion actualizada correctamente.');
 } catch (\Exception $e) {
     // Handle the exception
     return redirect()->route('boats.index')->with('error', 'Ha ocurrido un error al actualizar la embarcacion.');

@@ -41,7 +41,7 @@
 
 
     </div>
-    {!! Form::text('boat_comments', null, ['class' => 'border rounded-md p-2 w-full', 'placeholder' => 'Comentarios de embarcacion']) !!}
+    {!! Form::text('boat_comments', null, ['class' => 'border rounded-md p-2 w-full mt-5', 'placeholder' => 'Comentarios de embarcacion']) !!}
     {!! Form::hidden('client_id', $client_id) !!}
 
 
