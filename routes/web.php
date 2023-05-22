@@ -34,6 +34,7 @@ Route::middleware('auth')->group(function () {
 
 Route::resource('clients', ClientsController::class)->except(['show']);
 Route::resource('boats',BoatsController::class)->except(['show']);
+Route::resource('projects',ProjectsController::class)->except(['show']);
 
 Route::post('/search', [SearchController::class,'show'])->name('search');
 

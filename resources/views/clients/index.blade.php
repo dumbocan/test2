@@ -15,7 +15,7 @@
 
                 <x-nav-link :href="route('clients.create')" :active="request()->routeIs('clients.create')" class="ml-10" >
 
-                    {{ __('Nuevo') }}
+                {{ __('Nuevo') }}
 
                 </x-nav-link>
             </h2>
@@ -23,21 +23,11 @@
 
      <!-- alert success -->
 
-        @if(session('success'))
-            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
-                <strong class="font-bold">¡Éxito!</strong>
-                <span class="block sm:inline">{{session('success')}}.</span>
-            </div>
-        @endif
+        <x-alert-succes/>
 
      <!-- alert error -->
 
-        @if(session('error'))
-            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-                <strong class="font-bold">¡Éxito!</strong>
-                <span class="block sm:inline">{{session('error')}}.</span>
-            </div>
-        @endif
+        <x-alert-error/>
 
     </x-slot>
 
@@ -60,8 +50,6 @@
                         <div class="grid md:grid-cols-8 gap 10 ">
                             <span class="md:mt-5 mr-3 p-3 border border-black rounded-lg col-span-4 ">
 
-
-
                             <!-- butons update and delete-->
                             <div >
                                 <div class="grid grid-cols-2 gap-4  float-right">
@@ -70,15 +58,16 @@
                                             <img class="w-5" src="{{ asset('images/icons/update.svg') }}" alt="Icon">
                                         </button>
                                     </a>
-                                    <button onclick ="Livewire.emit('showDeleteConfirmationModal', '{{ $client->client_id }}')">
-                                        <img class="w-5" src="{{ asset('images/icons/delete.svg') }}" alt="Icon">
-                                    </button>
+                                    <!-- delete modal and buton-->
+
+                                    <x-deleteModal :id="$client->client_id" :name="$client->client_name"/>
+
                                 </div>
                             </div>
 
 
                             <span class="text-2xl underline underline-offset-2">
-                                    {{$client->client_name}}
+                                {{$client->client_name}}
                                 </span>
                                 <br>
                                 {{$client->client_ident}}
@@ -97,29 +86,24 @@
 
                                 @if($client->boats->isNotEmpty())
 
-
-
-
                                     <!-- butons update and delete-->
                             <div >
+
+                            @foreach($client->boats as $boat)
                                 <div class="grid grid-cols-2 gap-4  float-right">
                                     <a href="{{ route('boats.edit', $client->client_id) }}" >
                                         <button>
                                             <img class="w-5" src="{{ asset('images/icons/update.svg') }}" alt="Icon">
                                         </button>
                                     </a>
-                                    <button onclick ="Livewire.emit('showDeleteConfirmationModal', '{{ $client->client_id }}')">
+
+                                    <x-deleteModal :id="$boat->boat_id" :name="$boat->boat_name"/>
+                                    <!--<button onclick ="Livewire.emit('showDeleteConfirmationModal', '{{ $client->client_id }}')">
                                         <img class="w-5" src="{{ asset('images/icons/delete.svg') }}" alt="Icon">
-                                    </button>
+                                    </button>-->
                                 </div>
                             </div>
 
-
-
-
-
-
-                                    @foreach($client->boats as $boat)
                                         <span class="text-2xl underline underline-offset-2">
                                             {{ $boat->boat_name }}
                                         </span>
@@ -143,7 +127,15 @@
                        <!-- projects of the boat -->
 
                         <div class="mt-5 border border-black rounded-lg mr-3 p-3">
-                                  <!-- butons update and delete-->
+
+                        @if($boat->projects->isNotEmpty())
+not empty
+                        @else
+                            <p>No tiene proyecto</p>
+                            <a href="{{ route('projects.create', ['boat_id' => $client->boat_id]) }}">Agregar proyecto</a>
+                        @endif
+                        <!-- butons update and delete-->
+
                                   <div >
                                 <div class="grid grid-cols-2 gap-4  float-right">
                                     <a href="{{ route('clients.edit', $client->client_id) }}" >
@@ -151,9 +143,9 @@
                                             <img class="w-5" src="{{ asset('images/icons/update.svg') }}" alt="Icon">
                                         </button>
                                     </a>
-                                    <button onclick ="Livewire.emit('showDeleteConfirmationModal', '{{ $client->client_id }}')">
-                                        <img class="w-5" src="{{ asset('images/icons/delete.svg') }}" alt="Icon">
-                                    </button>
+
+                                    <x-deleteModal :id="$boat->boat_id" :name="$boat->boat_name"/>
+
                                 </div>
                             </div>
                             <span class="text-2xl underline underline-offset-2">

@@ -14,4 +14,9 @@ class boats extends Model
      * @var string
      */
     protected $primaryKey = 'boat_id';
+
+    public function projects()
+    {
+        return $this->hasMany(Projects::class, 'boat_id');
+    }
 }
