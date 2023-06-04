@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Clients;
 
 class boats extends Model
 {
@@ -14,6 +15,12 @@ class boats extends Model
      * @var string
      */
     protected $primaryKey = 'boat_id';
+
+    public function client()
+{
+        return $this->belongsTo(Clients::class, 'client_id');
+}
+
 
     public function projects()
     {

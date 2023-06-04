@@ -15,7 +15,7 @@ class BoatsController extends Controller
     }
     public function index()
     {
-        $page = Boats::paginate(10);
+        $page = Boats::with('clients')->paginate(10);
         return view('boats.index', ['boats' => $page]);
     }
 

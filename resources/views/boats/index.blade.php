@@ -1,8 +1,5 @@
 <x-app-layout>
 
-@livewire('delete-confirmation-modal')
-
-
 <!-- content layouts/app $slot -->
 
 
@@ -62,9 +59,9 @@
                         {{$boat->boat_name}}
                     </span>
                     <br>
-                    {{($boat->boat_marina).(' , ').($boat->boat_type)}}
+                        {{($boat->boat_marina).(' , ').($boat->boat_type)}}
                     <br>
-                    {{$boat->boat_comments}}
+                        {{$boat->boat_comments}}
 
 
                 </div>

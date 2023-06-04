@@ -1,5 +1,4 @@
 
-@livewire('delete-confirmation-modal')
 
 
 <!-- content layouts/app $slot -->
@@ -82,13 +81,6 @@
                                 {{($client->client_telephone). ('  ,  ') .($client->client_email)}}
                                 <br>
                                 {{$client->client_comments}}
-
-
-
-
-
-
-
 
 
                     </div>

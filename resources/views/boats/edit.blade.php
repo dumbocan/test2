@@ -1,5 +1,3 @@
-<!-- content layouts/app $slot -->
-
 <x-app-layout>
 
 <!-- tags -->

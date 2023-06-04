@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class ClientsController extends Controller
 {   public $boat;
+    public $project;
 
     public function show($client)
     {
@@ -18,7 +19,7 @@ class ClientsController extends Controller
 
     public function index()
 {
-    $clients = Clients::with('boats')->paginate(10);
+    $clients = Clients::with('boats.projects')->paginate(10);
 
     return view('clients.index', compact('clients'));
 }
