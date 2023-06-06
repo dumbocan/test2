@@ -38,7 +38,6 @@ Route::resource('projects',ProjectsController::class)->except(['show']);
 
 Route::post('/search', [SearchController::class,'show'])->name('search');
 
-Route::get('/projects',[projectsController::class,'show'])->name('projects');
 Route::get('/management',[managementController::class,'show'])->name('management');
 });
 

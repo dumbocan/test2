@@ -16,13 +16,14 @@ class projects extends Model
      */
     protected $primaryKey = 'project_id';
 
-    public function boat()
+    public function boats()
     {
         return $this->belongsTo(Boats::class, 'boat_id');
     }
 
-    public function workshhets()
+    public function workshets()
     {
         return $this->hasMany(Worksheets::class, 'project_id');
     }
+
 }

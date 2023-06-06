@@ -16,7 +16,7 @@ class boats extends Model
      */
     protected $primaryKey = 'boat_id';
 
-    public function client()
+    public function clients()
 {
         return $this->belongsTo(Clients::class, 'client_id');
 }

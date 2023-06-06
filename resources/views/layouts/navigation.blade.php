@@ -73,7 +73,7 @@
 
 
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('boats.index')" :active="request()->routeIs('boats')">
+            <x-responsive-nav-link :href="route('boats.index')" :active="request()->routeIs('boats.index')">
                 {{ __('Barcos') }}
             </x-responsive-nav-link>
         </div>
@@ -85,7 +85,7 @@
         </div>
 
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('projects')" :active="request()->routeIs('projects')">
+            <x-responsive-nav-link :href="route('projects.index')" :active="request()->routeIs('projects.index')">
                 {{ __('Proyectos') }}
             </x-responsive-nav-link>
         </div>

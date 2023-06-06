@@ -19,8 +19,10 @@ class ProjectsController extends Controller
      */
     public function index()
     {
-        $page = Projects::paginate(10);
-        return view('projects.index', ['Projects' => $page]);
+
+
+        $projects = Projects::with('boats')->paginate(10);
+        return view('projects.index', compact('projects'));
     }
 
     /**
@@ -61,7 +63,7 @@ class ProjectsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show()
     {
         //
     }
