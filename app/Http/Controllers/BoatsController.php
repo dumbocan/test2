@@ -22,7 +22,6 @@ class BoatsController extends Controller
     public function create(Request $request)
     {
         $client_id = $request->input('client_id');
-
         return view('boats.create', ['client_id' => $client_id]);
     }
 
@@ -59,7 +58,6 @@ try {
     $boat->boat_type = ucwords($request->input('boat_type'));
     $boat->boat_picture = null;
     $boat->boat_comments = ucwords($request->input('boat_comments'));
-    //$boat->client_id = $request->input('client_id');
 
     // Update the client in the database
     $boat->save();

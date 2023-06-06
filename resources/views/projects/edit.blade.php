@@ -45,6 +45,9 @@
 
     {!! Form::hidden('project_id', $project->project_id) !!}
 
+    {!! Form::hidden('boat_id', $project->boat_id) !!}
+
+
 {!! Form::close() !!}
 
 

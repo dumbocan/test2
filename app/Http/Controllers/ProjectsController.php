@@ -25,23 +25,14 @@ class ProjectsController extends Controller
         return view('projects.index', compact('projects'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create(Request $request)
-{
-    $boat_id = $request->input('boat_id');
-    $boat = Boats::findOrFail($boat_id);
-    $client = $boat->client;
+    {
+        $boat_id = $request->input('boat_id');
+        $boat = Boats::findOrFail($boat_id);
+        $client = $boat->client;
+        return view('projects.create', compact('boat', 'client'));
+    }
 
-    // Realiza las operaciones necesarias con los objetos de $boat y $client
-
-    return view('projects.create', compact('boat', 'client'));
-}
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $project = new Projects;
@@ -60,9 +51,6 @@ class ProjectsController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show()
     {
         //
@@ -71,7 +59,7 @@ class ProjectsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $project_id)
+    public function edit($project_id)
     {
         $project = Projects::find($project_id);
         return view('projects.edit',['project' => $project]);
@@ -83,7 +71,28 @@ class ProjectsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        try {
+            $project = Projects::find($request->input('project_id'));
+
+            $project -> project_number = ($request->input('project_number'));
+            $project -> project_date = ($request->input('project_date'));
+            $project -> project_description = ($request->input('project_description'));
+            $project -> project_state = ($request->input('project_state'));
+            $project -> project_comments = ($request->input('project_comments'));
+            $project -> pictures = $request->input('null');
+            $project -> file = $request->input('null');
+            $project -> boat_id = ($request->input('boat_id'));
+
+
+
+            // Update the client in the database
+            $project->save();
+
+            return redirect()->route('projects.index')->with('success', 'Proyecto actualizada correctamente.');
+        } catch (\Exception $e) {
+            // Handle the exception
+            return redirect()->route('projects.index')->with('error', 'Ha ocurrido un error al actualizar el proyecto.');
+        }
     }
 
     /**
