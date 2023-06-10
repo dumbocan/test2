@@ -50,10 +50,19 @@
             <div class="h-max bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
 
+                    <!-- butons update and delete-->
 
-        <!-- client data -->
+                    <div class="grid grid-cols-2 gap-4  float-right">
+                        <a href="{{ route('projects.edit', $project->project_id) }}" >
+                            <button>
+                                <img class="w-5" src="{{ asset('images/icons/update.svg') }}" alt="Icon">
+                            </button>
+                        </a>
+                        <x-deleteModal :id="$project->project_id" :name="$project->project_number"/>
 
+                    </div>
 
+                    <!-- client data -->
 
                     <span class="text-2xl underline underline-offset-2">
                         {{$project->project_number}}

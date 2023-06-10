@@ -86,7 +86,6 @@
 
                                     <span class="mt-5  mr-3 p-3 border border-black rounded-lg  col-span-4">
 
-                                        <!-- butons update and delete-->
 
                                         @if($client->boats->isEmpty())
                                             <p>No tiene barco</p>
@@ -96,6 +95,9 @@
                                         @else
 
                                             @foreach($client->boats as $boat)
+
+                                                <!-- butons update and delete-->
+
                                                 <div class="grid grid-cols-2 gap-4  float-right">
                                                     <a href="{{ route('boats.edit', $boat->boat_id) }}" >
                                                         <button>

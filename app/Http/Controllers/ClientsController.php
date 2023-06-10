@@ -20,8 +20,8 @@ class ClientsController extends Controller
     public function index()
 {
     $clients = Clients::with('boats.projects')->paginate(10);
-
-    return view('clients.index', compact('clients'));
+    $controller = "clients";
+    return view('clients.index', compact('clients','controller'));
 }
 
     public function create()

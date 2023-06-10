@@ -52,7 +52,15 @@
 
 
         <!-- client data -->
+                <div class="grid grid-cols-2 gap-4  float-right">
+                                                    <a href="{{ route('boats.edit', $boat->boat_id) }}" >
+                                                        <button>
+                                                            <img class="w-5" src="{{ asset('images/icons/update.svg') }}" alt="Icon">
+                                                        </button>
+                                                    </a>
 
+                                                    <x-deleteModal :id="$boat->boat_id" :name="$boat->boat_name"/>
+                                                </div>
 
 
                     <span class="text-2xl underline underline-offset-2">

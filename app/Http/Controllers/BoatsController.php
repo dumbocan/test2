@@ -62,7 +62,7 @@ try {
     // Update the client in the database
     $boat->save();
 
-    return redirect()->route('clients.index')->with('success', 'Embarcacion actualizada correctamente.');
+    return redirect()->route('boats.index')->with('success', 'Embarcacion actualizada correctamente.');
 } catch (\Exception $e) {
     // Handle the exception
     return redirect()->route('boats.index')->with('error', 'Ha ocurrido un error al actualizar la embarcacion.');
