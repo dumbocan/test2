@@ -54,6 +54,7 @@
                                     <span class="md:mt-5 mr-3 p-3 border border-black rounded-lg col-span-4 ">
 
                                     <!-- butons update and delete-->
+
                                     <div >
                                         <div class="grid grid-cols-2 gap-4  float-right">
                                             <a href="{{ route('clients.edit', $client->client_id) }}" >
@@ -62,10 +63,11 @@
                                                 </button>
                                             </a>
                                             <!-- delete modal and buton-->
-
-                                            <x-deleteModal :id="$client->client_id" :name="$client->client_name"/>
-
+                                        @if($client->boats->isEmpty())
+                                            <x-deleteModal :id="$client->client_id" :name="$client->client_name" :type="'c'"/>
+                                        @endif
                                         </div>
+
                                     </div>
 
                                     <span class="text-2xl underline underline-offset-2">
@@ -104,8 +106,9 @@
                                                             <img class="w-5" src="{{ asset('images/icons/update.svg') }}" alt="Icon">
                                                         </button>
                                                     </a>
-
-                                                    <x-deleteModal :id="$boat->boat_id" :name="$boat->boat_name"/>
+                                                    @if($boat->projects->isEmpty())
+                                                        <x-deleteModal :id="$boat->boat_id" :name="$boat->boat_name" :type="'b'"/>
+                                                    @endif
                                                 </div>
 
                                                 <span class="text-2xl underline underline-offset-2">
@@ -134,11 +137,14 @@
                                         <br>
                                     </span>
 
-                                    @if($boat->projects->isEmpty())
-                                        <p>No tiene proyecto</p>
-                                        <a href="{{ route('projects.create', ['boat_id' => $boat->boat_id]) }}">Agregar proyecto</a>
+                                    @if(($boat->projects) && ($client->boats)->isEmpty())
 
-                                    @else
+                                        @elseif($boat->projects->isEmpty())
+                                            <p>No tiene proyecto</p>
+                                            <a href="{{ route('projects.create', ['boat_id' => $boat->boat_id]) }}">Agregar proyecto</a>
+
+                                        @else
+
                                         @foreach($boat->projects as $project)
 
                                             <!-- butons update and delete-->
@@ -149,7 +155,8 @@
                                                         <img class="w-5" src="{{ asset('images/icons/update.svg') }}" alt="Icon">
                                                     </button>
                                                 </a>
-                                                <x-deleteModal :id="$project->project_id" :name="$project->project_number"/>
+
+                                                <x-deleteModal :id="$project->project_id" :name="$project->project_number" :type="'p'"/>
 
                                             </div>
 

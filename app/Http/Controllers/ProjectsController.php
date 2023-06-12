@@ -29,7 +29,7 @@ class ProjectsController extends Controller
     {
         $boat_id = $request->input('boat_id');
         $boat = Boats::findOrFail($boat_id);
-        $client = $boat->client;
+        $client = $boat->clients;
         return view('projects.create', compact('boat', 'client'));
     }
 
@@ -88,10 +88,10 @@ class ProjectsController extends Controller
             // Update the client in the database
             $project->save();
 
-            return redirect()->route('projects.index')->with('success', 'Proyecto actualizada correctamente.');
+            return redirect()->route('clients.index')->with('success', 'Proyecto actualizada correctamente.');
         } catch (\Exception $e) {
             // Handle the exception
-            return redirect()->route('projects.index')->with('error', 'Ha ocurrido un error al actualizar el proyecto.');
+            return redirect()->route('clients.index')->with('error', 'Ha ocurrido un error al actualizar el proyecto.');
         }
     }
 
@@ -100,6 +100,10 @@ class ProjectsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $project = Projects::find($id);
+        $project->delete();
+        return redirect()->route('clients.index')->with('success', 'Proyecto borrado correctamente.');
     }
+
+
 }

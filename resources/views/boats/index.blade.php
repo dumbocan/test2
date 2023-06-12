@@ -58,8 +58,9 @@
                                                             <img class="w-5" src="{{ asset('images/icons/update.svg') }}" alt="Icon">
                                                         </button>
                                                     </a>
-
-                                                    <x-deleteModal :id="$boat->boat_id" :name="$boat->boat_name"/>
+                                                    @if($boat->projects->isEmpty())
+                                                        <x-deleteModal :id="$boat->boat_id" :name="$boat->boat_name" :type="'b'"/>
+                                                    @endif
                                                 </div>
 
 

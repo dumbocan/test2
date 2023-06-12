@@ -58,7 +58,7 @@
                                 <img class="w-5" src="{{ asset('images/icons/update.svg') }}" alt="Icon">
                             </button>
                         </a>
-                        <x-deleteModal :id="$project->project_id" :name="$project->project_number"/>
+                        <x-deleteModal :id="$project->project_id" :name="$project->project_number" :type="'p'"/>
 
                     </div>
 

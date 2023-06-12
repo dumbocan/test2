@@ -75,7 +75,7 @@ public function destroy($boat_id)
     $boat = Boats::find($boat_id);
 
     $boat->delete();
-    return redirect()->route('boats.index')->with('success', 'Embarcacion borrada correctamente.');
+    return redirect()->route('clients.index')->with('success', 'Embarcacion borrada correctamente.');
 
 }
 }

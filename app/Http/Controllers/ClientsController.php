@@ -18,11 +18,12 @@ class ClientsController extends Controller
     }
 
     public function index()
-{
-    $clients = Clients::with('boats.projects')->paginate(10);
-    $controller = "clients";
-    return view('clients.index', compact('clients','controller'));
-}
+    {
+        $clients = Clients::with('boats.projects')->paginate(10);
+        $type = 'c';
+        return view('clients.index', ['clients' => $clients, 'type' => $type]);
+    }
+
 
     public function create()
     {
