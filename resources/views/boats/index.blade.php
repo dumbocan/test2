@@ -51,17 +51,17 @@
                 <div class="p-6 text-gray-900">
 
 
-        <!-- client data -->
-                <div class="grid grid-cols-2 gap-4  float-right">
-                                                    <a href="{{ route('boats.edit', $boat->boat_id) }}" >
-                                                        <button>
-                                                            <img class="w-5" src="{{ asset('images/icons/update.svg') }}" alt="Icon">
-                                                        </button>
-                                                    </a>
-                                                    @if($boat->projects->isEmpty())
-                                                        <x-deleteModal :id="$boat->boat_id" :name="$boat->boat_name" :type="'b'"/>
-                                                    @endif
-                                                </div>
+                <!-- client data -->
+                    <div class="grid grid-cols-2 gap-4  float-right">
+                        <a href="{{ route('boats.edit', $boat->boat_id) }}" >
+                            <button>
+                                <img class="w-5" src="{{ asset('images/icons/update.svg') }}" alt="Icon">
+                            </button>
+                        </a>
+                        @if($boat->projects->isEmpty())
+                            <x-deleteModal :id="$boat->boat_id" :name="$boat->boat_name" :type="'b'"/>
+                        @endif
+                    </div>
 
 
                     <span class="text-2xl underline underline-offset-2">

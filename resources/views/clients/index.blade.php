@@ -131,11 +131,29 @@
                                 <!-- projects of the boat -->
                                 <div class="mt-5 border border-black rounded-lg mr-3 p-3">
 
+                                    <div class="p-1 drop-shadow-lg mt-1 border border-black rounded-lg  bg-gray-200 ">
 
-                                    <span class="text-2xl underline underline-offset-2">
-                                        {{'Proyectos'}}
-                                        <br>
-                                    </span>
+                                    <!-- projects bar and new project icon -->
+
+                                        <span class="text-2xl underline underline-offset-2">
+                                            {{'Proyectos'}}
+
+
+                                        </span>
+                                        @if($client->boats->isNotEmpty())
+
+                                            <div class="float-right mt-1 mr-4">
+                                                <a href="{{ route('projects.create', ['boat_id' => $boat->boat_id]) }}">
+                                                    <button>
+
+                                                        <img class="w-5" src="{{ asset('images/icons/new.svg') }}" alt="Icon">
+                                                    </button>
+                                                </a>
+                                            </div>
+
+                                        @endif
+                                    </div>
+                                    <br>
 
                                     @if(($boat->projects) && ($client->boats)->isEmpty())
 
@@ -149,27 +167,28 @@
 
                                             <!-- butons update and delete-->
 
-                                            <div class="grid grid-cols-2 gap-4  float-right">
-                                                <a href="{{ route('projects.edit', $client->client_id) }}" >
-                                                    <button>
-                                                        <img class="w-5" src="{{ asset('images/icons/update.svg') }}" alt="Icon">
-                                                    </button>
-                                                </a>
+                                            <div class="mt-2 border border-black rounded-lg mr-3 p-3">
+                                                <div class="grid grid-cols-3 gap-4  float-right">
 
-                                                <x-deleteModal :id="$project->project_id" :name="$project->project_number" :type="'p'"/>
+                                                    <a href="{{ route('projects.edit', $project->project_id) }}" >
+                                                        <button>
+                                                            <img class="w-5" src="{{ asset('images/icons/update.svg') }}" alt="Icon">
+                                                        </button>
+                                                    </a>
 
+                                                    <x-deleteModal :id="$project->project_id" :name="$project->project_number" :type="'p'"/>
+
+                                                </div>
+
+                                                {{$project->project_number.('-').$boat->boat_name}}
+                                                <br>
+                                                {{ date('d,m,Y', strtotime($project->project_date)) }}  <!-- date format for d-m-Y-->
+                                                <br>
+                                                {{$project->project_description}}
+                                                <br>
+                                                {{$project->project_comments}}
                                             </div>
-
-                                            {{$project->project_number}}
-                                            <br>
-                                            {{$project->project_date}}
-                                            <br>
-                                            {{$project->project_description}}
-                                            <br>
-                                            {{$project->comments}}
-
                                         @endforeach
-
                                     @endif
                                 </div>
                             </div>

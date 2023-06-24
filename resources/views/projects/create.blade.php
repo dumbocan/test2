@@ -18,9 +18,9 @@
         {!! csrf_field() !!}
 
         <div class="grid sm:grid-cols-2 gap-4 ">
-            <div>
+             <!--<div>
                 {!! Form::text('project_number', null, ['class' => 'border rounded-md p-2 w-full', 'placeholder' => 'numero de proyecto']) !!}
-            </div>
+            </div> -->
 
             <div>
                 {!! Form::date('project_date', null, ['class' => 'border rounded-md p-2 w-full', 'placeholder' => 'fecha de creacion de proyecto']) !!}

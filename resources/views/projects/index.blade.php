@@ -62,15 +62,20 @@
 
                     </div>
 
+
+            <!-- Mostrar otros detalles del barco según sea necesario -->
+
                     <!-- client data -->
 
                     <span class="text-2xl underline underline-offset-2">
-                        {{$project->project_number}}
+                        {{($project->project_number) . (' - ') . Strtoupper($project->boats->boat_name)}}
                     </span>
+
                     <br>
-                        {{($project->project_date)}}
+                    {{ date('d,m,Y', strtotime($project->project_date)) }}
                     <br>
                         {{$project->project_comments}}
+                    <br>
 
 
                 </div>
