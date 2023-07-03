@@ -168,9 +168,9 @@
                                             <!-- butons update and delete-->
 
                                             <div class="mt-2 border border-black rounded-lg mr-3 p-3">
-                                                <div class="grid grid-cols-3 gap-4  float-right">
+                                                <div class="grid   float-right flex-col">
 
-                                                    <a href="{{ route('projects.edit', $project->project_id) }}" >
+                                                    <a href="{{ route('projects.edit', $project->project_id) }}" class="mb-3">
                                                         <button>
                                                             <img class="w-5" src="{{ asset('images/icons/update.svg') }}" alt="Icon">
                                                         </button>
@@ -179,14 +179,23 @@
                                                     <x-deleteModal :id="$project->project_id" :name="$project->project_number" :type="'p'"/>
 
                                                 </div>
+                                                <div class=" grid grid-cols-2 gap-10 border-b border-black w-11/12">
 
-                                                {{$project->project_number.('-').$boat->boat_name}}
-                                                <br>
-                                                {{ date('d,m,Y', strtotime($project->project_date)) }}  <!-- date format for d-m-Y-->
-                                                <br>
-                                                {{$project->project_description}}
-                                                <br>
-                                                {{$project->project_comments}}
+                                                        <div >
+                                                            {{$project->project_number.('-').strToUpper($boat->boat_name)}}
+                                                        </div>
+
+                                                        <div class="flex justify-end">
+                                                            {{ date('d,m,Y', strtotime($project->project_date)) }}  <!-- date format for d-m-Y-->
+                                                        </div>
+
+                                                </div>
+                                                <p>
+                                                    {{$project->project_description}}
+                                                </p>
+                                                <p>
+                                                    {{$project->project_comments}}
+                                                </p>
                                             </div>
                                         @endforeach
                                     @endif

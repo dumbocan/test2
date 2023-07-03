@@ -1,3 +1,15 @@
+
+
+
+
+
+
+
+
+
+
+
+
 <x-app-layout>
 
 <!-- content layouts/app $slot -->
