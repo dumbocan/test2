@@ -1,15 +1,5 @@
 
 
-
-
-
-
-
-
-
-
-
-
 <x-app-layout>
 
 <!-- content layouts/app $slot -->
@@ -19,37 +9,44 @@
 <!-- tags -->
 
 <x-slot name="header">
-    <div class="flex">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+<div class="items-left "> <!-- Añadimos "items-center" para alinear verticalmente -->
+        <h2 class="flex font-semibold text-xl text-gray-800 "> <!-- Añadimos "flex-grow" para que el título ocupe todo el espacio disponible -->
             {{ __('Proyectos') }}
 
-            <x-nav-link :href="route('boats.create')" :active="request()->routeIs('boats.create')" class="ml-10" >
 
-                {{ __('Nuevo') }}
+        <!-- Settings Dropdown -->
+        <!-- Utilizamos "ml-auto" para alinear el dropdown a la derecha -->
+            <x-overdropdown align="top" width="60" >
+                <x-slot name="trigger">
 
-            </x-nav-link>
+                    <div class="ml-20">{{ __('Nuevo') }}</div>
+
+                </x-slot>
+
+                <x-slot name="content">
+                    <x-dropdown-link :href="route('clients.create')">
+                        {{ __('Nuevo cliente') }}
+                    </x-dropdown-link>
+
+                    <!-- Authentication -->
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+
+                        <x-dropdown-link >
+
+                            {{ __('Buscar cliente') }}
+                        </x-dropdown-link>
+                    </form>
+                </x-slot>
+            </x-overdropdown>
+                <div class="ml-20">{{ __('En espera') }}</div>
+                <div class="ml-20">{{ __('Trabajando') }}</div>
+                <div class="ml-20">{{ __('Terminados') }}</div>
+
         </h2>
-    </div>
-
-    <!-- alert success -->
-
-    @if(session('success'))
-        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
-            <strong class="font-bold">¡Éxito!</strong>
-            <span class="block sm:inline">{{session('success')}}.</span>
-        </div>
-    @endif
-
-    <!-- alert error -->
-
-    @if(session('error'))
-        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-            <strong class="font-bold">¡Éxito!</strong>
-            <span class="block sm:inline">{{session('error')}}.</span>
-        </div>
-    @endif
-
+</div>
 </x-slot>
+
 
 <div class="bg-blue-200 px-8">
     {{ $projects->links() }}

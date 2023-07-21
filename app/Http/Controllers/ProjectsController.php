@@ -29,9 +29,14 @@ class ProjectsController extends Controller
     public function create(Request $request)
     {
         $boat_id = $request->input('boat_id');
+        if($boat_id)
+        {
         $boat = Boats::findOrFail($boat_id);
         $client = $boat->clients;
         return view('projects.create', compact('boat', 'client'));
+        }else{
+            return view('projects.new');
+        }
     }
 
     public function store(Request $request)

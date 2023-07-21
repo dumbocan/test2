@@ -12,6 +12,14 @@
 
         </div>
 
+ <!-- alert success -->
+
+ <x-alert-succes/>
+
+<!-- alert error -->
+
+   <x-alert-error/>
+
     </x-slot>
 
     {!! Form::open(['route' => 'projects.store', 'class' => 'mt-7 mx-10 flex flex-col justify-center ']) !!}
