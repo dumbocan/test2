@@ -3,23 +3,24 @@
 <x-app-layout>
 
 <!-- tags -->
-    <x-slot name="header">
+<x-slot name="header">
         <div class="flex">
-            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                <x-nav-link :href="route('boats.create')" :active="request()->routeIs('boats.create')">
-                    {{ __('Nuevo') }}
-                </x-nav-link>
+            <div class="hidden text-lg font-bold space-x-8 sm:-my-px sm:ml-13 sm:flex">
+                    {{ __('Crear nueva embarcación') }}
+
             </div>
         </div>
     </x-slot>
 
 
  <!-- Responsive menu -->
-    <div class="sm:hidden space-x-8 sm:-my-px sm:ml-10  pt-2 pb-3 space-y-1">
-        <x-responsive-nav-link :href="route('boats.create')" :active="request()->routeIs('boats.create')">
-            {{ __('Nuevo') }}
-        </x-responsive-nav-link>
+    <div class="sm:hidden text-lg font-bold space-x-8 sm:-my-px sm:ml-13 pl-5 pt-2 pb-3 space-y-1">
+            {{ __('Crear nueva embarcación') }}
     </div>
+
+<x-alert-succes/>
+
+<x-alert-error/>
 
 {!! Form::open(['route' => 'boats.store', 'class' => 'mt-7 mx-10 flex flex-col justify-center ']) !!}
     {!! csrf_field() !!}

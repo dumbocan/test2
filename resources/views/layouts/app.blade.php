@@ -15,20 +15,24 @@
         <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-        @livewireStyles
+
         <style>
             [x-cloak] { display: none; }
         </style>
         </head>
     <body class="font-sans antialiased">
 
-        <div class="min-h-screen bg-blue-100">
+        <div class="min-h-screen pb-10 bg-blue-100">
+
+            <!-- Page Navigation -->
+
             @include('layouts.navigation')
+
 
             <!-- Page Heading -->
             @if (isset($header))
                 <header class="bg-gray-50  shadow">
-                    <div class="max-w-7xl mx-auto pt-3 px-3 sm:px-8 lg:px-8 pb-4">
+                    <div class="max-w-7xl mx-auto p-3 sm:px-8 lg:px-8 pb-4">
                         {{ $header }}
                     </div>
                 </header>
@@ -39,6 +43,6 @@
                 {{ $slot }}
             </main>
         </div>
-        @livewireScripts
+
     </body>
 </html>

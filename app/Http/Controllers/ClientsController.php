@@ -48,7 +48,16 @@ class ClientsController extends Controller
         // Guardar el cliente en la base de datos
         $client->save();
 
+        if ($request->input('submit_type') === 'Añadir embarcación') {
+            // Redirigir a la página "boat.create"
+
+            return redirect()->route('boats.create')->with('success', 'Cliente añadido correctamente.');
+        }else{
+
+        // Redirigir a alguna otra página después de enviar el formulario
         return redirect()->route('clients.index')->with('success', 'Cliente añadido correctamente.');
+        }
+
     }
 
     public function edit($client_id)

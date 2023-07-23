@@ -5,27 +5,24 @@
 <!-- tags -->
     <x-slot name="header">
         <div class="flex">
-            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                <x-nav-link :href="route('clients.create')" :active="request()->routeIs('clients.create')">
-                    {{ __('Nuevo') }}
-                </x-nav-link>
+            <div class="hidden text-lg font-bold space-x-8 sm:-my-px sm:ml-13 sm:flex">
+                    {{ __('Crear nuevo cliente') }}
+
             </div>
         </div>
     </x-slot>
 
 
  <!-- Responsive menu -->
-    <div class="sm:hidden space-x-8 sm:-my-px sm:ml-10  pt-2 pb-3 space-y-1">
-        <x-responsive-nav-link :href="route('clients.create')" :active="request()->routeIs('clients.create')">
-            {{ __('Nuevo') }}
-        </x-responsive-nav-link>
+    <div class="sm:hidden text-lg font-bold space-x-8 sm:-my-px sm:ml-13 pl-5 pt-2 pb-3 space-y-1">
+            {{ __('Crear nuevo cliente') }}
     </div>
 
 
-{!! Form::open(['route' => 'clients.store', 'class' => 'mt-7 mx-10 flex flex-col justify-center ']) !!}
+{!! Form::open(['route' => 'clients.store', 'class' => 'mtola-7 mx-10 flex flex-col justify-center ']) !!}
     {!! csrf_field() !!}
 
-    <div class="grid sm:grid-cols-2 gap-4 ">
+    <div class="grid sm:grid-cols-2 gap-4 mt-5 ">
         <div>
             {!! Form::text('client_name', null, ['class' => 'border rounded-md p-2 w-full', 'placeholder' => 'Nombre']) !!}
         </div>
@@ -65,8 +62,13 @@
 
     {!! Form::textarea('client_comments', null, ['class' => 'mt-5 border rounded-md p-2 w-full h-14','placeholder' => 'Comentarios']) !!}
 
-    {!! Form::submit('Enviar formulario', ['class' => 'mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']) !!}
+    <div class="flex mt-5 space-x-4">
 
+            {!! Form::submit('Enviar formulario', ['class' => 'bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded rounded-lg shadow-xl', 'name' => 'submit_type', 'value' => 'send_form']) !!}
+
+            {!! Form::submit('Añadir embarcación', ['class' => 'bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded rounded-lg shadow-xl', 'name' => 'submit_type', 'value' => 'add_boat']) !!}
+
+    </div>
 {!! Form::close() !!}
 
 

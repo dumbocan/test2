@@ -1,11 +1,4 @@
 <div class="flex">
-    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-            <div class="">
-        {{ __('Inicio') }}
-            </div>
-        </x-nav-link>
-    </div>
 
     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
         <x-nav-link :href="route('boats.index')" :active="request()->routeIs('boats')">

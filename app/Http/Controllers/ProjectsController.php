@@ -21,7 +21,9 @@ class ProjectsController extends Controller
     {
 
 
-        $projects = Projects::with('boats')->paginate(10);
+        $projects = Projects::with('boats')
+        ->orderBy('created_at', 'desc') // Order results by date last first
+        ->paginate(10);
 
         return view('projects.index', compact('projects'));
     }

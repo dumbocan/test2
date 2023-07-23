@@ -1,20 +1,6 @@
-
-
-
-
-
-
-
-
-
-
-
-
 <x-app-layout>
 
 <!-- content layouts/app $slot -->
-
-
 
 <!-- tags -->
 
@@ -23,7 +9,7 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Proyectos') }}
 
-            <x-nav-link :href="route('boats.create')" :active="request()->routeIs('boats.create')" class="ml-10" >
+            <x-nav-link :href="route('clients.create')" :active="request()->routeIs('clients.create')" class="ml-10" >
 
                 {{ __('Nuevo') }}
 
@@ -32,22 +18,11 @@
     </div>
 
     <!-- alert success -->
-
-    @if(session('success'))
-        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
-            <strong class="font-bold">¡Éxito!</strong>
-            <span class="block sm:inline">{{session('success')}}.</span>
-        </div>
-    @endif
+    <x-alert-succes/>
 
     <!-- alert error -->
+    <x-alert-error/>
 
-    @if(session('error'))
-        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-            <strong class="font-bold">¡Éxito!</strong>
-            <span class="block sm:inline">{{session('error')}}.</span>
-        </div>
-    @endif
 
 </x-slot>
 
@@ -84,7 +59,7 @@
                     </span>
 
                     <br>
-                    {{ date('d,m,Y', strtotime($project->project_date)) }}
+                        {{ date('d,m,Y', strtotime($project->project_date)) }}
                     <br>
                         {{$project->project_comments}}
                     <br>
