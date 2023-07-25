@@ -36,10 +36,11 @@ class ProjectsController extends Controller
         return view('projects.create', compact('boat', 'client'));
     }
 
+
     public function store(Request $request)
     {
-        $project = new Projects;
-            // Obtener el año actual y el mes actual
+    try {
+        // Obtener el año actual y el mes actual
         $currentYear = date('y');
         $currentMonth = date('m');
 
@@ -52,13 +53,10 @@ class ProjectsController extends Controller
         // Determinar el número de proyecto a partir del último proyecto
         if ($latestProject) {
             $latestProjectNumber = $latestProject->project_number;
-
-            // Obtener el año y el mes del último proyecto
-            $latestYear = substr($latestProjectNumber, 0, 2);
-            $latestMonth = substr($latestProjectNumber, 3, 2);
+            $latestYearMonth = substr($latestProjectNumber, 0, 5);
 
             // Verificar si el último proyecto pertenece al mes actual
-            if ($latestYear === $currentYear && $latestMonth === $currentMonth) {
+            if ($latestYearMonth === $currentYear . '-' . $currentMonth) {
                 $lastProjectCount = intval(substr($latestProjectNumber, 6, 2)); // Obtener el número de proyectos en el mes actual
                 $projectCount = $lastProjectCount + 1; // Incrementar el número de proyectos en 1
             } else {
@@ -73,25 +71,49 @@ class ProjectsController extends Controller
             sprintf('%02d', $currentMonth) . '-' .
             sprintf('%02d', $projectCount);
 
-        // Asignar el número de proyecto al proyecto actual
+        // Crear el nuevo proyecto
+        $project = new Projects;
         $project->project_number = $projectNumber;
+        $project->project_date = $request->input('project_date');
+        $project->project_description = $request->input('project_description');
+        $project->project_state = $request->input('project_state');
+        $project->project_comments = $request->input('project_comments');
+        $project->pictures = $request->input('null');
+        $project->file = $request->input('null');
+        $project->boat_id = $request->input('boat_id');
+        $project->save();
 
+        // Obtener el id del barco desde el formulario o donde lo estés obteniendo
+        $boat_id = $project->boat_id;
 
+        // Obtener el modelo del barco
+        $boat = Boats::findOrFail($boat_id);
 
-      //  $project -> project_number = ($request->input('project_number'));
-        $project -> project_date = ($request->input('project_date'));
-        $project -> project_description = ($request->input('project_description'));
-        $project -> project_state = ($request->input('project_state'));
-        $project -> project_comments = ($request->input('project_comments'));
-        $project -> pictures = $request->input('null');
-        $project -> file = $request->input('null');
-        $project -> boat_id = ($request->input('boat_id'));
+        // Obtener el modelo del cliente asociado al barco
+        $client = $boat->clients;
 
-        $project -> save();
+        // Ahora puedes obtener el id del cliente
+        $client_id = $client->client_id;
 
-        return redirect()->route('clients.index')->with('success', 'Proyecto añadido correctamente.');
+          return redirect()->route('clients.show', ['client' => $client_id])->with('success', 'Proyecto creada correctamente.');
+      } catch (\Exception $e) {
 
+    // Obtener el id del barco desde el formulario o donde lo estés obteniendo
+    $boat_id = $project->boat_id;
+
+    // Obtener el modelo del barco
+    $boat = Boats::findOrFail($boat_id);
+
+    // Obtener el modelo del cliente asociado al barco
+    $client = $boat->clients;
+
+    // Ahora puedes obtener el id del cliente
+    $client_id = $client->client_id;
+
+    return redirect()->route('clients.show', ['client' => $client_id])->with('error', 'Ha ocurrido un error al crear el proyecto.');
+      }
     }
+
 
     public function show()
     {
@@ -130,10 +152,33 @@ class ProjectsController extends Controller
             // Update the client in the database
             $project->save();
 
-            return redirect()->route('clients.index')->with('success', 'Proyecto actualizada correctamente.');
+            // Obtener el id del barco desde el formulario o donde lo estés obteniendo
+          $boat_id = $project->boat_id;
+
+          // Obtener el modelo del barco
+          $boat = Boats::findOrFail($boat_id);
+
+          // Obtener el modelo del cliente asociado al barco
+          $client = $boat->clients;
+
+          // Ahora puedes obtener el id del cliente
+          $client_id = $client->client_id;
+
+            return redirect()->route('clients.show', ['client' => $client_id])->with('success', 'Proyecto actualizada correctamente.');
         } catch (\Exception $e) {
+               // Obtener el id del barco desde el formulario o donde lo estés obteniendo
+          $boat_id = $project->boat_id;
+
+          // Obtener el modelo del barco
+          $boat = Boats::findOrFail($boat_id);
+
+          // Obtener el modelo del cliente asociado al barco
+          $client = $boat->clients;
+
+          // Ahora puedes obtener el id del cliente
+          $client_id = $client->client_id;
             // Handle the exception
-            return redirect()->route('clients.index')->with('error', 'Ha ocurrido un error al actualizar el proyecto.');
+            return redirect()->route('clients.show', ['client' => $client_id])->with('error', 'Ha ocurrido un error al actualizar el proyecto.');
         }
     }
 
@@ -142,9 +187,37 @@ class ProjectsController extends Controller
      */
     public function destroy(string $id)
     {
-        $project = Projects::find($id);
-        $project->delete();
-        return redirect()->route('clients.index')->with('success', 'Proyecto borrado correctamente.');
+    try{
+            $project = Projects::find($id);
+            $project->delete();
+            // Obtener el id del barco desde el formulario o donde lo estés obteniendo
+            $boat_id = $project->boat_id;
+
+            // Obtener el modelo del barco
+            $boat = Boats::findOrFail($boat_id);
+
+            // Obtener el modelo del cliente asociado al barco
+            $client = $boat->clients;
+
+            // Ahora puedes obtener el id del cliente
+            $client_id = $client->client_id;
+
+            return redirect()->route('clients.show', ['client' => $client_id])->with('success', 'Proyecto borrado correctamente.');
+        } catch (\Exception $e) {
+               // Obtener el id del barco desde el formulario o donde lo estés obteniendo
+          $boat_id = $project->boat_id;
+
+          // Obtener el modelo del barco
+          $boat = Boats::findOrFail($boat_id);
+
+          // Obtener el modelo del cliente asociado al barco
+          $client = $boat->clients;
+
+          // Ahora puedes obtener el id del cliente
+          $client_id = $client->client_id;
+            // Handle the exception
+            return redirect()->route('clients.show', ['client' => $client_id])->with('error', 'Ha ocurrido un error al borrar el proyecto.');
+        }
     }
 
 

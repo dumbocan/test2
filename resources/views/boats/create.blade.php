@@ -15,7 +15,7 @@
 
  <!-- Responsive menu -->
     <div class="sm:hidden text-lg font-bold space-x-8 sm:-my-px sm:ml-13 pl-5 pt-2 pb-3 space-y-1">
-            {{ __('Crear nueva embarcación') }}
+            {{ __('Crear nueva embarcación')  }}
     </div>
 
 <x-alert-succes/>

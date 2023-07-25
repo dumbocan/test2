@@ -16,7 +16,7 @@
         }
     }" x-cloak>
     <button @click="open = true; deleteUrl = getDeleteUrl()" x-bind:data-id="$id">
-        <img class="w-7" src="{{ asset('images/icons/delete.svg') }}" alt="Icon">
+        <img class="w-5" src="{{ asset('images/icons/delete.svg') }}" alt="Icon">
     </button>
     <div x-show="open" x-cloak x-transition class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center" style="position: fixed; z-index: 9999;">
 

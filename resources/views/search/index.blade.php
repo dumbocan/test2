@@ -4,6 +4,7 @@
 <br>
 @foreach($boats as $boat)
 {{ $boat->boat_name}}
+<br>
 {{ $boat->boat_marina}}
 <br>
 @endforeach
@@ -12,6 +13,15 @@
 <br>
 @foreach($clients as $client)
 {{ $client->client_name}}
-{{ $client-client_email}}
+<br>
+{{ $client->client_email}}
+<br>
+@endforeach
+
+<br>
+@foreach($projects as $project)
+{{ $project->project_descriptiondesc}}
+<br>
+{{ $project->project_comments}}
 <br>
 @endforeach

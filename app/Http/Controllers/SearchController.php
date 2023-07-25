@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\clients;
 use App\Models\boats;
+use App\Models\projects;
 
 class SearchController extends Controller
 {
@@ -21,10 +22,16 @@ class SearchController extends Controller
             ->orWhere('boat_marina', 'LIKE', "%$search%")
             ->get();
 
+        $projects = Projects::where('project_description', 'LIKE', "%$search%")
+
+            ->orWhere('project_comments', 'LIKE', "%$search%")
+            ->get();
+
         return view('search.index')->with([
             'search' => $search,
             'clients' => $clients,
             'boats' => $boats,
+            'projects' => $projects
         ]);
     }
 

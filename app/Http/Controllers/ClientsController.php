@@ -11,17 +11,18 @@ class ClientsController extends Controller
 {   public $boat;
     public $project;
 
-    public function show($client)
-    {
-        $client = Clients::find($client);
+    public function show($id)
+{
+    $client = Clients::with('boats.projects')->findOrFail($id);
 
-    }
+    return view('clients.show', ['client' => $client]);
+}
 
     public function index()
     {
-        $clients = Clients::with('boats.projects')->paginate(10);
-        $type = 'c';
-        return view('clients.index', ['clients' => $clients, 'type' => $type]);
+        $clients = Clients::with('boats')->orderBy('client_name')->paginate(10);
+
+        return view('clients.index', ['clients' => $clients]);
     }
 
 
@@ -31,7 +32,8 @@ class ClientsController extends Controller
     }
 
     public function store(Request $request)
-    {
+{
+    try {
         $client = new Clients;
         $client->client_name = ucwords($request->input('client_name'));
         $client->client_street = $request->input('client_street');
@@ -48,17 +50,20 @@ class ClientsController extends Controller
         // Guardar el cliente en la base de datos
         $client->save();
 
+
+
         if ($request->input('submit_type') === 'Añadir embarcación') {
             // Redirigir a la página "boat.create"
-
-            return redirect()->route('boats.create')->with('success', 'Cliente añadido correctamente.');
-        }else{
-
-        // Redirigir a alguna otra página después de enviar el formulario
-        return redirect()->route('clients.index')->with('success', 'Cliente añadido correctamente.');
+            return redirect()->route('boats.create', ['client_id' => $client->client_id])->with('success', 'Cliente añadido correctamente.');
+        } else {
+            return redirect()->route('clients.show', ['client' => $client->client_id])->with('success', 'Cliente añadido correctamente.');
         }
-
+    } catch (\Exception $e) {
+        // Handle the exception
+        return redirect()->route('clients.show', ['client' => $client->client_id])->with('error', 'Ha ocurrido un error al añadir al cliente.');
     }
+}
+
 
     public function edit($client_id)
     {
@@ -118,10 +123,10 @@ public function update(Request $request)
         // Update the client in the database
         $client->save();
 
-        return redirect()->route('clients.index')->with('success', 'Cliente actualizado correctamente.');
+        return redirect()->route('clients.show', ['client'=> $client->client_id])->with('success', 'Cliente actualizado correctamente.');
     } catch (\Exception $e) {
         // Handle the exception
-        return redirect()->route('clients.index')->with('error', 'An error occurred while updating the client.');
+        return redirect()->route('clients.show', ['client'=> $client->client_id])->with('error', 'A ocurrido un error al actualizar al cliente.');
     }
 }
 
