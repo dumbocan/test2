@@ -95,7 +95,7 @@ class ProjectsController extends Controller
         // Ahora puedes obtener el id del cliente
         $client_id = $client->client_id;
 
-          return redirect()->route('clients.show', ['client' => $client_id])->with('success', 'Proyecto creada correctamente.');
+          return redirect()->route('clients.show', ['client' => $client_id])->with('success', 'Proyecto creado correctamente.');
       } catch (\Exception $e) {
 
     // Obtener el id del barco desde el formulario o donde lo estés obteniendo
