@@ -162,6 +162,9 @@
                                 </div>
                                 <div class=" grid grid-cols-2 gap-10 border-b border-black w-11/12">
 
+
+                                    <a href="{{ route('worksheet.index', ['project' => $project->project_id]) }}" class="block">
+
                                         <div >
                                             {{$project->project_number.('-').strToUpper(optional($boat)->boat_name)}}
                                         </div>
@@ -169,6 +172,8 @@
                                         <div class="flex justify-end">
                                             {{ date('d,m,Y', strtotime($project->project_date)) }}  <!-- date format for d-m-Y-->
                                         </div>
+                                    </a>
+
 
                                 </div>
                                 <p>

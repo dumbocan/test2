@@ -10,12 +10,6 @@
     <div class="flex">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Barcos') }}
-
-            <x-nav-link :href="route('boats.create')" :active="request()->routeIs('boats.create')" class="ml-10" >
-
-                {{ __('Nuevo') }}
-
-            </x-nav-link>
         </h2>
     </div>
 
@@ -41,7 +35,7 @@
                 <div class="p-6 text-gray-900">
 
 
-                <!-- client data -->
+                <!-- boat data -->
                     <div class="grid grid-cols-2 gap-4  float-right">
                         <a href="{{ route('boats.edit', $boat->boat_id) }}" >
                             <button>
@@ -53,15 +47,16 @@
                         @endif
                     </div>
 
+                    <a href="{{ route('clients.show', ['client' => $boat->client_id]) }}" class="block">
 
-                    <span class="text-2xl underline underline-offset-2">
-                        {{$boat->boat_name}}
-                    </span>
-                    <br>
-                        {{($boat->boat_marina).(' , ').($boat->boat_type)}}
-                    <br>
-                        {{$boat->boat_comments}}
-
+                        <span class="text-2xl underline underline-offset-2">
+                            {{$boat->boat_name}}
+                        </span>
+                        <br>
+                            {{($boat->boat_marina).(' , ').($boat->boat_type)}}
+                        <br>
+                            {{$boat->boat_comments}}
+                    </a>
 
                 </div>
             </div>

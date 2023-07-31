@@ -53,17 +53,18 @@
             <!-- Mostrar otros detalles del barco según sea necesario -->
 
                     <!-- client data -->
+                    <a href="{{ route('worksheet.index', ['project' => $project->project_id]) }}" class="block">
 
-                    <span class="text-2xl underline underline-offset-2">
-                        {{($project->project_number) . (' - ') . Strtoupper($project->boats->boat_name)}}
-                    </span>
+                        <span class="text-2xl underline underline-offset-2">
+                            {{($project->project_number) . (' - ') . Strtoupper($project->boats->boat_name)}}
+                        </span>
 
-                    <br>
-                        {{ date('d,m,Y', strtotime($project->project_date)) }}
-                    <br>
-                        {{$project->project_comments}}
-                    <br>
-
+                        <br>
+                            {{ date('d,m,Y', strtotime($project->project_date)) }}
+                        <br>
+                            {{$project->project_comments}}
+                        <br>
+                    </a>
 
                 </div>
             </div>
