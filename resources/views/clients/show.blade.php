@@ -160,28 +160,26 @@
                                     <x-deleteModal :id="$project->project_id" :name="$project->project_number" :type="'p'"/>
 
                                 </div>
-                                <div class=" grid grid-cols-2 gap-10 border-b border-black w-11/12">
-
-
+                                <div class="grid grid-cols-1 gap-10 border-b border-black w-11/12">
                                     <a href="{{ route('worksheet.index', ['project' => $project->project_id]) }}" class="block">
-
-                                        <div >
-                                            {{$project->project_number.('-').strToUpper(optional($boat)->boat_name)}}
+                                        <div class="flex justify-between">
+                                            <div>
+                                                {{ $project->project_number }}
+                                            </div>
+                                            <div>
+                                                {{ date('d,m,Y', strtotime($project->project_date)) }}
+                                            </div>
                                         </div>
-
-                                        <div class="flex justify-end">
-                                            {{ date('d,m,Y', strtotime($project->project_date)) }}  <!-- date format for d-m-Y-->
-                                        </div>
-                                    </a>
-
 
                                 </div>
-                                <p>
-                                    {{$project->project_description}}
-                                </p>
-                                <p>
-                                    {{$project->project_comments}}
-                                </p>
+                                    <p>
+                                        {{ $project->project_description }}
+                                    </p>
+                                    <p>
+                                        {{ $project->project_comments }}
+                                    </p>
+  </a>
+
                             </div>
                         @endforeach
                         @endif

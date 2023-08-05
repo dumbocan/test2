@@ -56,7 +56,7 @@
                     <a href="{{ route('worksheet.index', ['project' => $project->project_id]) }}" class="block">
 
                         <span class="text-2xl underline underline-offset-2">
-                            {{($project->project_number) . (' - ') . Strtoupper($project->boats->boat_name)}}
+                            {{($project->project_number)}}
                         </span>
 
                         <br>

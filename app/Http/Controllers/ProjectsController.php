@@ -71,9 +71,15 @@ class ProjectsController extends Controller
             sprintf('%02d', $currentMonth) . '-' .
             sprintf('%02d', $projectCount);
 
+        $boat_id = $request->input('boat_id');
+        $boat = Boats::findOrFail($boat_id);
+        $boat_name = StrToUpper($boat->boat_name);
+        $project_number = $projectNumber.' '.$boat_name;
+
+
         // Crear el nuevo proyecto
         $project = new Projects;
-        $project->project_number = $projectNumber;
+        $project->project_number = $project_number;
         $project->project_date = $request->input('project_date');
         $project->project_description = $request->input('project_description');
         $project->project_state = $request->input('project_state');

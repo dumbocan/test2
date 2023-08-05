@@ -14,4 +14,10 @@ class worksheets extends Model
      * @var string
      */
     protected $primaryKey = 'worksheet_id';
+
+    public function projects()
+    {
+        return $this->belongsTo(Projects::class, 'project_id');
+    }
+
 }

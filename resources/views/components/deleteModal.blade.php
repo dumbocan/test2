@@ -12,8 +12,10 @@
                 return '{{ route('boats.destroy', ['boat' => $id]) }}';
             } else if (this.type === 'p') {
                 return '{{ route('projects.destroy', ['project' => $id]) }}';
-            }
+            } else if (this.type === 'w') {
+                return '{{ route('worksheet.destroy', ['worksheet' => $id]) }}';
         }
+    }
     }" x-cloak>
     <button @click="open = true; deleteUrl = getDeleteUrl()" x-bind:data-id="$id">
         <img class="w-5" src="{{ asset('images/icons/delete.svg') }}" alt="Icon">

@@ -21,7 +21,7 @@ class projects extends Model
         return $this->belongsTo(Boats::class, 'boat_id');
     }
 
-    public function workshets()
+    public function worksheets()
     {
         return $this->hasMany(Worksheets::class, 'project_id');
     }
