@@ -9,7 +9,7 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Hoja de trabajo') }}
 
-            <x-nav-link :href="route('worksheet.create', $worksheet -> project_id )" :active="request()->routeIs('worksheet.create')" class="ml-10" >
+            <x-nav-link :href="route('worksheet.create', $project_id )" :active="request()->routeIs('worksheet.create')" class="ml-10" >
 
                 {{ __('Nuevo') }}
 
@@ -25,94 +25,87 @@
 
 
 </x-slot>
+<div class="bg-blue-200 px-8">
+<!-- Generar enlaces de paginación con parámetros -->
+{{ $worksheet->appends(['project' => $project_id])->links() }}
+</div>
+
+<div class="group py-5">
+    <div class="max-w-7xl mx-auto sm:px-2 lg:px-2 ">
+        <div class="h-max bg-white overflow-hidden shadow-sm sm:rounded-lg">
+             <div class="p-6 text-gray-900">
+             <div class="w-full flex font-bold  border-b dark:border-neutral-500">
+                <div class="grid grid-cols-12">
+
+                    <div class=" w-24"> {{'Fecha'}}</div>
+                    <div class="pl-5 col-span-8 text-center"> {{ 'Descripcion' }}</div>
+                    <div class="text-center"> {{ 'Hora de entrada' }}</div>
+                    <div class="text-center"> {{ 'Hora de salida' }}</div>
+                    <div class="w-1/2 text-center"> {{ 'Tiempo efectivo' }}</div>
+
+                </div>
+                <div class="w-16 "></div>
+             </div>
+                @foreach ($worksheet as $work)
+                        <!--<div class="w-full flex  bg-white drop-shadow hover:drop-shadow-lg hover:opacity-70 rounded-md">-->
+                        <div class="w-full flex">
 
 
-@foreach ($worksheets as $worksheet)
-    <div class="group py-5">
-            <div class="max-w-6xl mx-auto sm:px-2 lg:px-4 ">
-                <div class="h-max bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 text-gray-900">
 
-                        <!-- butons update and delete -->
-                        <div>
-                            <div class="grid grid-cols-2 gap-4 float-right">
-                                <a href="{{ route('worksheet.edit', $worksheet->project_id) }}">
-                                    <button>
-                                        <img class="w-5" src="{{ asset('images/icons/update.svg') }}" alt="Icon">
-                                    </button>
+                            <div class="py-6 border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-blue-200">
+
+                                <a href="{{ route('worksheet.show', ['worksheet' => $work->worksheet_id]) }} class="block">
+
+                                    <div class="grid grid-cols-12">
+
+                                        <div class=" w-24"> {{$work->worksheet_date}}</div>
+                                        <div class="pl-5 col-span-8"> {{$work->worksheet_description}}</div>
+                                        <div class="text-center pl-5"> {{ \Carbon\Carbon::parse($work->worksheet_start_time)->format('H:i') }}</div>
+                                        <div class="text-center pl-5"> {{ \Carbon\Carbon::parse($work->worksheet_finish_time)->format('H:i') }}</div>
+                                        <div class="w-1/2 text-right"> {{$work->worksheet_effective_time}}</div>
+
+                                    </div>
                                 </a>
-                                <!-- delete modal and buton -->
-                                @if($client->boats->isEmpty())
-                                    <x-deleteModal :id="$worksheet->worksheet_id" :name="$workshet->worksheet_date" :type="'w'"/>
-                                @endif
                             </div>
-                        </div>
-                        <div >
-                        <a href="{{ route('worksheet.show', ['worksheet' => $worksheet->worksheet_id]) }}" class="block">
+                            <div class="w-16 flex items-center justify-between">
 
-                            <!-- client data -->
-                            <span class="text-2xl underline underline-offset-2">
-                                {{$worksheet->worksheet_date}}
-                            </span>
-                            <br>
-                            {{$worksheet->worksheet_description}}
-                            <br>
-                            {{($worksheet->worksheet_start_time).(' , ').($worksheet->worksheet_finish_time).( ' , ').($worksheet->worksheet_effective_time).( ' , ')}}
+                                <x-update-button :id="$work->worksheet_id" :route="'worksheet.edit'"/>
 
-                            </a>
+                                <!-- Delete modal and button -->
+                                <x-deleteModal :id="$work->worksheet_id" :name="$work->worksheet_date" :type="'w'"/>
+                            </div>
+
+
+
                         </div>
-                    </div>
+
+                @endforeach
+             </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+        <!--    <div class="col-span-1 flex items-center justify-end">
+                <div class="flex space-x-2">
+
+
+                    <a href="{{ route('worksheet.edit', $work->project_id) }}">
+                        <button>
+                            <img class="w-5" src="{{ asset('images/icons/update.svg') }}" alt="Update Icon">
+                        </button>
+                    </a>
+-->
+
+                    <!-- Delete modal and button -->
+                  <!--   <x-deleteModal :id="$work->worksheet_id" :name="$work->worksheet_date" :type="'w'"/>
                 </div>
             </div>
-
-    </div>
-@endforeach
-
-
-
-
-
-
-
-
-
-
-
+            -->
 
 </x-app-layout>
 
-                  <!--      <option value='07:00'></option>
-                        <option value='07:30'></option>
-                        <option value='08:00'></option>
-                        <option value='07:00'></option>
-                        <option value='07:30'></option>
-                        <option value='08:00'></option>
-                        <option value='08:30'></option>
-                        <option value='09:00'></option>
-                        <option value='09:30'></option>
-                        <option value='10:00'></option>
-                        <option value='10:30'></option>
-                        <option value='11:00'></option>
-                        <option value='11:30'></option>
-                        <option value='12:00'></option>
-                        <option value='12:30'></option>
-                        <option value='13:00'></option>
-                        <option value='13:30'></option>
-                        <option value='14:00'></option>
-                        <option value='14:30'></option>
-                        <option value='15:00'></option>
-                        <option value='15:30'></option>
-                        <option value='16:00'></option>
-                        <option value='16:30'></option>
-                        <option value='17:00'></option>
-                        <option value='17:30'></option>
-                        <option value='18:00'></option>
-                        <option value='18:30'></option>
-                        <option value='19:00'></option>
-                        <option value='19:30'></option>
-                        <option value='20:00'></option>
-                        <option value='20:30'></option>
-                        <option value='21:00'></option>
-                        <option value='21:30'></option>
-                        <option value='22:00'></option>
-                        <option value='22:30'></option> -->

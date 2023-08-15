@@ -45,8 +45,10 @@
                                 <img class="w-5" src="{{ asset('images/icons/update.svg') }}" alt="Icon">
                             </button>
                         </a>
-                        <x-deleteModal :id="$project->project_id" :name="$project->project_number" :type="'p'"/>
+                        @if ($project->worksheet->count() < 1)
 
+                            <x-deleteModal :id="$project->project_id" :name="$project->project_number" :type="'p'"/>
+                        @endif
                     </div>
 
 

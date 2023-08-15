@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Projects;
 use App\Models\Boats;
-use App\Models\Clients;
+use App\Models\Worksheet;
 
 class ProjectsController extends Controller
 {
@@ -20,8 +20,8 @@ class ProjectsController extends Controller
     public function index()
     {
 
+        $projects = Projects::with('boats','worksheet')
 
-        $projects = Projects::with('boats')
         ->orderBy('created_at', 'desc') // Order results by date last first
         ->paginate(10);
 
@@ -222,7 +222,8 @@ class ProjectsController extends Controller
           // Ahora puedes obtener el id del cliente
           $client_id = $client->client_id;
             // Handle the exception
-            return redirect()->route('clients.show', ['client' => $client_id])->with('error', 'Ha ocurrido un error al borrar el proyecto.');
+            return redirect()->route('clients.show', compact('client'))->with('error', 'Ha ocurrido un error al borrar el proyecto.');
+           // ['client' => $client_id])
         }
     }
 

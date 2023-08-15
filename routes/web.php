@@ -33,8 +33,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('clients', ClientsController::class);
-    Route::resource('boats',BoatsController::class)->except(['show']);
-    Route::resource('projects',ProjectsController::class)->except(['show']);
+    Route::resource('boats',BoatsController::class);
+    Route::resource('projects',ProjectsController::class);
     Route::resource('worksheet',worksheetController::class);
 
     Route::post('/search', [SearchController::class,'show'])->name('search');

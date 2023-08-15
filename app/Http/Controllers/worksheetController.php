@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Projects;
 use App\Models\Boats;
-use App\Models\Worksheets;
+use App\Models\Worksheet;
 
 class worksheetController extends Controller
 {
@@ -15,15 +15,14 @@ class worksheetController extends Controller
     public function index(Request $request)
     {
         $project_id = $request->input('project');
-        $worksheets = Worksheets::where('project_id', $project_id)->get();
-
-        if ($worksheets->isEmpty()) {
+        $worksheet = Worksheet::where('project_id', $project_id)->paginate(10);
+        if ($worksheet->isEmpty()) {
             $project = Projects::with('boats')->findOrFail($project_id);
             $boat = $project->boats;
 
             return view('worksheet.create', compact('project', 'boat'));
         } else {
-            return view('worksheet.index', compact('worksheets'));
+            return view('worksheet.index', compact('project_id','worksheet'));
         }
     }
 
@@ -33,17 +32,41 @@ class worksheetController extends Controller
     public function create(Request $request)
     {
         $worksheet_id = $request->input('project_id');
-        $worksheet = Worksheets::findOrFail($worksheet_id);
-dd($worksheet);
-        return view('worksheet.create', compact('project'));
+
+
+        return view('worksheet.create', compact('worksheet_id'));
     }
+
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+        $project = $request->input('project_id');
+        try{
+            $worksheet = new Worksheet;
+
+            $worksheet->worksheet_date = $request->input('worksheet_date');
+            $worksheet->worksheet_description = $request->input('worksheet_description');
+            $worksheet->worksheet_start_time = $request->input('worksheet_start_time');
+            $worksheet->worksheet_finish_time = $request->input('worksheet_finish_time');
+            $worksheet->worksheet_effective_time = $request->input('worksheet_effective_time');
+            $worksheet->project_id = $request->input('project_id');
+
+
+            $worksheet->save();
+
+            $worksheet_id = $worksheet->worksheet_id;
+
+            return redirect()->route('projects.show', compact('project', 'worksheet_id'))->with('success', 'Hoja de trabajo añadida correctamente.');
+
+        } catch (\Exception $e) {
+
+            return redirect()->route('projects.show', compact( 'worksheet_id'))->with('error', 'Hoja de trabajo añadida correctamente.');
+        }
+
+
     }
 
     /**

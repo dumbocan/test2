@@ -17,12 +17,12 @@
         }
     }
     }" x-cloak>
-    <button @click="open = true; deleteUrl = getDeleteUrl()" x-bind:data-id="$id">
+    <button @click="open = true; deleteUrl = getDeleteUrl()" x-bind:data-id="$id" >
         <img class="w-5" src="{{ asset('images/icons/delete.svg') }}" alt="Icon">
     </button>
-    <div x-show="open" x-cloak x-transition class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center" style="position: fixed; z-index: 9999;">
+    <div x-show="open" x-cloak x-transition class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" style="position: fixed; z-index: 9999;">
 
-        <div class="fixed inset-0 flex items-center justify-center">
+        <div class="fixed inset-0 flex items-center justify-center z-50">
             <div class="bg-white p-7 rounded-lg shadow-md">
                 <p>¿Estás seguro de que deseas eliminar a {{$name}} con ID {{$id}}?</p>
                 <div class="flex justify-end mt-4">

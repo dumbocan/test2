@@ -17,7 +17,7 @@ return new class extends Migration
             $table->longText('worksheet_description');
             $table->time('worksheet_start_time');
             $table->time('worksheet_finish_time');
-            $table->time('worksheet_effective_time');
+            $table->float('worksheet_effective_time');
             $table->foreignId('project_id')->constrained('projects','project_id');
             $table->timestamps();
         });
