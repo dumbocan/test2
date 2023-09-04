@@ -40,11 +40,13 @@
                     <!-- butons update and delete-->
 
                     <div class="grid grid-cols-2 gap-4  float-right">
-                        <a href="{{ route('projects.edit', $project->project_id) }}" >
+                        <!--<a href="{{ route('projects.edit', $project->project_id) }}" >
                             <button>
                                 <img class="w-5" src="{{ asset('images/icons/update.svg') }}" alt="Icon">
                             </button>
                         </a>
+                        -->
+                        <x-update-button :route="('projects')" :id="$project->project_id"/><!--update button, need route = route name, and id-->
                         @if ($project->worksheet->count() < 1)
 
                             <x-deleteModal :id="$project->project_id" :name="$project->project_number" :type="'p'"/>

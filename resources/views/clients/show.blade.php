@@ -156,9 +156,9 @@
                                             <img class="w-4" src="{{ asset('images/icons/update.svg') }}" alt="Icon">
                                         </button>
                                     </a>
-
+                                    @if ($project->worksheet->count() < 1)
                                     <x-deleteModal :id="$project->project_id" :name="$project->project_number" :type="'p'"/>
-
+                                    @endif
                                 </div>
                                 <div class="grid grid-cols-1 gap-10 border-b border-black w-11/12">
                                     <a href="{{ route('worksheet.index', ['project' => $project->project_id]) }}" class="block">

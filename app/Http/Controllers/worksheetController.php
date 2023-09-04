@@ -13,18 +13,22 @@ class worksheetController extends Controller
      * Display a listing of the resource.
      */
     public function index(Request $request)
-    {
-        $project_id = $request->input('project');
-        $worksheet = Worksheet::where('project_id', $project_id)->paginate(10);
-        if ($worksheet->isEmpty()) {
-            $project = Projects::with('boats')->findOrFail($project_id);
-            $boat = $project->boats;
+{
+    $project_id = $request->input('project');
+    $worksheet = Worksheet::where('project_id', $project_id)->paginate(10);
+    $totalEffectiveTime = $worksheet->sum('worksheet_effective_time'); // Suma de tiempo efectivo
+    $totalDays = Worksheet::where ('project_id' , $project_id)->count('worksheet_id')  ; // cuenta cantidad de registros
 
-            return view('worksheet.create', compact('project', 'boat'));
-        } else {
-            return view('worksheet.index', compact('project_id','worksheet'));
-        }
+    if ($worksheet->isEmpty()) {
+        $project = Projects::with('boats')->findOrFail($project_id);
+        $boat = $project->boats;
+
+        return view('worksheet.create', compact('project', 'boat'));
+    } else {
+        return view('worksheet.index', compact('project_id', 'worksheet', 'totalEffectiveTime','totalDays'));
     }
+}
+
 
     /**
      * Show the form for creating a new resource.
