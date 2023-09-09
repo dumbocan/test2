@@ -9,11 +9,7 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Proyectos') }}
 
-            <x-nav-link :href="route('clients.create')" :active="request()->routeIs('clients.create')" class="ml-10" >
 
-                {{ __('Nuevo') }}
-
-            </x-nav-link>
         </h2>
     </div>
 

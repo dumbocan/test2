@@ -15,17 +15,19 @@ class worksheetController extends Controller
     public function index(Request $request)
 {
     $project_id = $request->input('project');
+    $project = Projects::find($project_id);
+    $project_number = $project->project_number;
     $worksheet = Worksheet::where('project_id', $project_id)->paginate(10);
     $totalEffectiveTime = $worksheet->sum('worksheet_effective_time'); // Suma de tiempo efectivo
     $totalDays = Worksheet::where ('project_id' , $project_id)->count('worksheet_id')  ; // cuenta cantidad de registros
-
+    $project = Projects::with('boats')->findOrFail($project_id);
+    $boat = $project->boats;
     if ($worksheet->isEmpty()) {
-        $project = Projects::with('boats')->findOrFail($project_id);
-        $boat = $project->boats;
+
 
         return view('worksheet.create', compact('project', 'boat'));
     } else {
-        return view('worksheet.index', compact('project_id', 'worksheet', 'totalEffectiveTime','totalDays'));
+        return view('worksheet.index', compact('project_number','project_id', 'worksheet', 'totalEffectiveTime','totalDays','boat','project'));
     }
 }
 
@@ -36,9 +38,12 @@ class worksheetController extends Controller
     public function create(Request $request)
     {
         $worksheet_id = $request->input('project_id');
+        $project_id = $request->input('project_id');
 
+        $project = Projects::with('boats')->findOrFail($project_id);
+        $boat = $project->boats;
 
-        return view('worksheet.create', compact('worksheet_id'));
+        return view('worksheet.create', compact('project', 'boat'));
     }
 
 
@@ -100,8 +105,23 @@ class worksheetController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {
-        //
+    public function destroy($worksheet_id)
+{
+    // Buscar el Worksheet por su ID
+    $worksheet = Worksheet::find($worksheet_id);
+
+    // Verificar si se encontró el Worksheet
+    if ($worksheet) {
+        // Obtener el project_id del Worksheet
+        $project_id = $worksheet->project_id;
+
+        // Eliminar el Worksheet
+        $worksheet->delete();
+
+        return redirect()->route('worksheet.index', ['project' => $project_id])->with('success', 'Hoja de trabajo borrada correctamente.');
+    } else {
+        // Manejar el caso en que no se encontró el Worksheet
+        return redirect()->route('worksheet.index')->with('error', 'Hoja de trabajo no encontrada.');
     }
+}
 }
