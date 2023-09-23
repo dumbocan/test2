@@ -5,31 +5,26 @@
         <x-slot name="header">
             <div class="flex flex-wrap justify-between items-center">
                 <div class="w-full sm:w-auto mb-4 sm:mb-0">
-                    {{ ('Hoja de trabajo de ') . ($boat->boat_name) . (' correspondiente al proyecto ') . ($project->project_number) }}
+                    {{ ('Hoja de trabajo de ') . ($worksheet->projects->boats->boat_name) . (' correspondiente al proyecto ') . ($worksheet->projects->project_number) }}
                 </div>
             </div>
         </x-slot>
-        {!! Form::open(['route' => 'worksheet.store']) !!}  <!--mt-7 mx-10 flex flex-col justify-center -->
-            {!! csrf_field() !!}
+        {!! Form::open(['method' => 'PUT','route' => ['worksheet.update', $worksheet->worksheet_id] , 'class' => 'mt-7 mx-10 flex flex-col justify-center ']) !!}
+    {!! csrf_field() !!}
 
             <div class = " p-5 sm:flex flex-wrap justify items-center">
 
                 <div class="w-full sm:w-36">
-                    {!! Form::date('worksheet_date', null, ['class' => 'border rounded-md p-2 mb-3 w-full', 'placeholder' => 'fecha de creacion de hoja de trabajo']) !!}
+                    {!! Form::date('worksheet_date', $worksheet->worksheet_date, ['class' => 'border rounded-md p-2 mb-3 w-full', 'placeholder' => 'fecha de creacion de hoja de trabajo']) !!}
                 </div>
 
                 <div class="w-full sm:w-1/2">
-                    {!! Form::text('worksheet_description', null, ['class' => 'border rounded-md p-2 mb-3 w-full', 'placeholder' => 'Descripcion del trabajo']) !!}
+                    {!! Form::text('worksheet_description', $worksheet->worksheet_description, ['class' => 'border rounded-md p-2 mb-3 w-full', 'placeholder' => 'Descripcion del trabajo']) !!}
                 </div>
 
-
-                <x-time-calculator :work="$work" name="worksheet" listId="listahorasdeseadas">
+                    <x-time-calculator :work="$worksheet" name="worksheet" listId="listahorasdeseadas">
                         <x-slot name="options">
-                            <option value='07:00'></option>
-                            <option value='07:30'></option>
-                            <option value='08:00'></option>
-                            <option value='07:00'></option>
-                            <option value='07:30'></option>
+
                             <option value='08:00'></option>
                             <option value='08:30'></option>
                             <option value='09:00'></option>
@@ -58,17 +53,18 @@
                             <option value='20:30'></option>
                             <option value='21:00'></option>
                             <option value='21:30'></option>
-                            <option value='22:00'></option>
-                            <option value='22:30'></option>
+
                         </x-slot>
                     </x-time-calculator>
 
 
                 </div>
 
-                {!! Form::hidden('project_id', $project->project_id) !!}
-                {!! Form::hidden('project_state', $project->project_state) !!}
-            {!! Form::submit('Enviar formulario', ['class' => 'pl-5 mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']) !!}
+                {!! Form::hidden('project_id', $worksheet->projects->project_id) !!}
+
+                {!! Form::hidden('worksheet_id', $worksheet->worksheet_id) !!}
+
+            {!! Form::submit('Enviar formulario', ['class' => 'mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']) !!}
 
         {!! Form::close() !!}
 

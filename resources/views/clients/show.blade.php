@@ -108,20 +108,20 @@
 
                         </span>
                     </div>
-
+                    @if($client->boats->isNotEmpty())
                     <!-- projects of the boat -->
-                    <div class="mt-5 border border-black rounded-lg mr-3 p-3">
+                        <div class="mt-5 border border-black rounded-lg mr-3 p-3">
 
-                        <div class="p-1 drop-shadow-lg mt-1 border border-black rounded-lg  bg-gray-200 ">
+                            <div class="p-1 drop-shadow-lg mt-1 border border-black rounded-lg  bg-gray-200 ">
 
-                        <!-- projects bar and new project icon -->
+                            <!-- projects bar and new project icon -->
 
-                            <span class="text-2xl underline underline-offset-2">
-                                {{'Proyectos'}}
+                                <span class="text-2xl underline underline-offset-2">
+                                    {{'Proyectos'}}
+                                </span>
 
 
-                            </span>
-                            @if($client->boats->isNotEmpty())
+
 
                                 <div class="float-right mt-1 mr-4">
                                     <a href="{{ route('projects.create', ['boat_id' => optional($boat)->boat_id]) }}">
@@ -131,18 +131,12 @@
                                         </button>
                                     </a>
                                 </div>
+                            </div>
 
-                            @endif
-                        </div>
+
                         <br>
 
-                        @if(($client->boats)->isEmpty())
 
-                        @elseif(optional($boat->projects)->isEmpty())
-                            <p>No tiene proyecto</p>
-                            <a href="{{ route('projects.create', ['boat_id' => optional($boat)->boat_id]) }}">Agregar proyecto</a>
-
-                        @else
 
                         @foreach($boat->projects as $project)
 

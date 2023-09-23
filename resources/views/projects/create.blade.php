@@ -18,9 +18,7 @@
         {!! csrf_field() !!}
 
         <div class="grid sm:grid-cols-2 gap-4 ">
-             <!--<div>
-                {!! Form::text('project_number', null, ['class' => 'border rounded-md p-2 w-full', 'placeholder' => 'numero de proyecto']) !!}
-            </div> -->
+
 
             <div>
                 {!! Form::date('project_date', null, ['class' => 'border rounded-md p-2 w-full', 'placeholder' => 'fecha de creacion de proyecto']) !!}
@@ -30,9 +28,7 @@
                 {!! Form::text('project_description', null, ['class' => 'border rounded-md p-2 w-full', 'placeholder' => 'Descripcion de proyecto']) !!}
             </div>
 
-            <div>
-                {!! Form::text('project_state', null, ['class' => 'border rounded-md p-2 w-full', 'placeholder' => 'Estado del proyecto']) !!}
-            </div>
+
 
         </div>
 
@@ -40,6 +36,7 @@
 
         {!! Form::hidden('boat_id',$boat->boat_id) !!}
 
+        {!! Form::hidden('project_state', 'w') !!}
 
         {!! Form::submit('Enviar formulario', ['class' => 'mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']) !!}
 
