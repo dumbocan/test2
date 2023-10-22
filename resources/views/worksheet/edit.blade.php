@@ -9,16 +9,16 @@
                 </div>
             </div>
         </x-slot>
-        {!! Form::open(['method' => 'PUT','route' => ['worksheet.update', $worksheet->worksheet_id] , 'class' => 'mt-7 mx-10 flex flex-col justify-center ']) !!}
-    {!! csrf_field() !!}
+        {!! Form::open(['method' => 'PUT','route' => ['worksheet.update', $worksheet->worksheet_id]]) !!}
+            {!! csrf_field() !!}
 
-            <div class = " p-5 sm:flex flex-wrap justify items-center">
+            <div class = " m-5 lg:ml-5 md:flex flex-wrap justify-center items-center">
 
-                <div class="w-full sm:w-36">
+                <div class="w-full md:w-36">
                     {!! Form::date('worksheet_date', $worksheet->worksheet_date, ['class' => 'border rounded-md p-2 mb-3 w-full', 'placeholder' => 'fecha de creacion de hoja de trabajo']) !!}
                 </div>
 
-                <div class="w-full sm:w-1/2">
+                <div class="w-full md:w-1/2">
                     {!! Form::text('worksheet_description', $worksheet->worksheet_description, ['class' => 'border rounded-md p-2 mb-3 w-full', 'placeholder' => 'Descripcion del trabajo']) !!}
                 </div>
 
@@ -63,9 +63,9 @@
                 {!! Form::hidden('project_id', $worksheet->projects->project_id) !!}
 
                 {!! Form::hidden('worksheet_id', $worksheet->worksheet_id) !!}
-
-            {!! Form::submit('Enviar formulario', ['class' => 'mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']) !!}
-
+            <div class = "w-1/3">
+                {!! Form::submit('Enviar formulario', ['class' => 'md:ml-20 ml-5 mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']) !!}
+            </div>
         {!! Form::close() !!}
 
     </x-app-layout>

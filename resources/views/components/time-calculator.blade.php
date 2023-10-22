@@ -19,8 +19,8 @@
     }
 }">
 
-    <div class="flex flex-col sm:flex-row">
-        <div class="w-full sm:w-32">
+    <div class="flex flex-row">
+        <div class="md:w-32 w-34">
             {!! Form::text($name . '_start_time', null, [
                 'class' => 'border rounded-md p-2 mb-3 w-full placeholder-gray-500 placeholder-opacity-100',
                 'x-model' => 'start',
@@ -30,7 +30,7 @@
             ]) !!}
 
         </div>
-        <div class="w-full sm:w-32">
+        <div class="md:w-32 w-34">
         {!! Form::text($name . '_finish_time', null, [
             'class' => 'border rounded-md p-2 mb-3 w-full placeholder-gray-500 placeholder-opacity-100',
             'x-model' => 'finish',
@@ -40,7 +40,7 @@
         ]) !!}
 
         </div>
-        <div class="w-full sm:w-32">
+        <div class="md:w-32 w-34">
             {!! Form::text($name . '_effective_time', null, [
                 'class' => 'border rounded-md p-2 mb-3 w-full placeholder-gray-500 placeholder-opacity-100',
                 'x-model' => 'result',
