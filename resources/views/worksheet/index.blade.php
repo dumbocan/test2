@@ -5,16 +5,20 @@
 <!-- tags -->
 
 <x-slot name="header">
+    <h2 class="text-center font-semibold text-3xl pb-3">
+        {{ __('Hoja de trabajo') }}
+    </h2>
     <div class="grid grid-cols-3 gap-4 lg:grid lg:grid-cols-6 lg:gap-1 lg:m-auto font-semibold text-xl text-gray-800 leading-tight">
-        <h2 class="">
-            {{ __('Hoja de trabajo') }}
-        </h2>
 
         <p class="col-span-2">
             Proyecto: {{ $project_number }}
         </p>
 
-        <p >
+        <a class="lg:hidden ml-28" href="{{ route('worksheet.create', ['project_id' => $project->project_id]) }}" class="m-auto" >
+            <img class="w-5" src="{{ asset('images/icons/new.svg') }}" alt="Icon">
+        </a>
+
+        <p class="col-span-2">
             Total h. efectivas: {{ $totalEffectiveTime }}
         </p>
 
@@ -22,7 +26,7 @@
             Registros: {{ $totalDays }}
         </p>
 
-        <a href="{{ route('worksheet.create', ['project_id' => $project->project_id]) }}" class="m-auto" >
+        <a class=" hidden lg:block place-items-center ml-28" href="{{ route('worksheet.create', ['project_id' => $project->project_id]) }}" class="m-auto" >
             <img class="w-5" src="{{ asset('images/icons/new.svg') }}" alt="Icon">
         </a>
 
